@@ -2,6 +2,11 @@ from Token import Token
 from Group import Group
 
 class Scoreboard:
+	'''
+	Scoreboard represents a scoreboard, on which you, dear player, gets to
+	publish your group's progress.
+	'''
+	
 	def __init__(self):
 		pass
 	

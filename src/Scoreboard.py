@@ -1,5 +1,5 @@
 from Token import Token
-from Group import Group
+from entities.Group import Group
 
 class Scoreboard:
 	'''

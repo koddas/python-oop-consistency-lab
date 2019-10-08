@@ -1,4 +1,4 @@
-from Token import Token
+from entities.Token import Token
 from entities.Group import Group
 
 class Scoreboard:

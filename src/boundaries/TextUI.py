@@ -1,7 +1,8 @@
 from entities.Group import Group
 from entities.Person import Person
+from boundaries.UserInterface import UserInterface
 
-class TextUI:
+class TextUI(UserInterface):
     '''
     TextUI represents a text-based user interface.
     '''

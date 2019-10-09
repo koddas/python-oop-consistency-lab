@@ -1,5 +1,4 @@
 from entities.Token import Token
-from entities.Group import Group
 from boundaries.UserInterface import UserInterface
 from controllers.NetConnection import NetConnection
 from controllers.Scoreboard import Scoreboard
@@ -25,7 +24,7 @@ class Competition():
     
     def __init__(self, ui: UserInterface):
         self._ui = ui
-        self._conn = NetConnection()
+        self._conn = NetConnection.get_instance()()
         self._board = Scoreboard()
         self._storage = Storage()
         self._factory = EntityFactory()
@@ -57,8 +56,8 @@ class Competition():
         
         token = Token()
         
-        filename = self._ui.request_filename()
-        if self._storage.save(Competition.FILE_PREFIX + filename, token):
+        name = self._ui.request_filename()
+        if self._storage.save(Competition.FILE_PREFIX + name, token):
             if self._conn.signup(group, token):
                 self._board.start_timer(token)
                 self._ui.prompt_user("Thank you. You're now registered.")
@@ -69,6 +68,16 @@ class Competition():
         sys.exit(0)
     
     def perform_challenge(self) -> None:
+        self._ui.prompt_user("Cool. Let's play!")
+        name = self._ui.request_filename() 
+        token = self._storage.read(Competition.FILE_PREFIX + name, Token)
+        
+        if token is None:
+            self._ui.prompt_user("Couldn't read your token")
+            sys.exit(0)
+        
+        challenge = self._conn.request_challenge(token)
+        
         sys.exit(0)
     
     def finish_game(self) -> None:

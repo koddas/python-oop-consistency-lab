@@ -1,5 +1,6 @@
 import requests
 import json
+import inspect
 from entities.Token import Token
 from entities.Group import Group
 from entities.Challenge import Challenge
@@ -32,6 +33,9 @@ class NetConnection():
         This method signs you up for the competition. The group is identified
         by a token.
         '''
+        if group.get_nbr_of_members() < 2:
+            return False
+        
         token_value = token.get_value()
         people = []
         for person in group.get_all_members():
@@ -47,7 +51,6 @@ class NetConnection():
         if json_response['success']:
             return True
 
-        print(json_response['message'])
         return False
 
     
@@ -55,6 +58,9 @@ class NetConnection():
         '''
         Starts a timer, visible for all to see.
         '''
+        print(inspect.stack()[1][3])
+        if inspect.stack()[1][3] != "start_timer":
+            return False
         token_value = token.get_value()
         response = requests.post(self._URL + '?start', data={
             'token': token_value
@@ -64,13 +70,14 @@ class NetConnection():
         if json_response['success']:
             return True
 
-        print(json_response['message'])
         return False
     
     def stop_timer(self, token: Token) -> bool:
         '''
         Stops the aforementioned timer.
         '''
+        if inspect.stack()[1][3] != "stop_timer":
+            return False
         token_value = token.get_value()
         response = requests.post(self._URL + '?stop', data={
             'token': token_value
@@ -80,7 +87,6 @@ class NetConnection():
         if json_response['success']:
             return True
 
-        print(json_response['message'])
         return False
     
     def request_challenge(self, token: Token) -> Challenge:
@@ -117,6 +123,8 @@ class NetConnection():
         There can be only one. Use this method to claim your prize, but be
         careful: you only get one try!
         '''
+        if inspect.stack()[1][3] != "finish_game":
+            return False
         token_value = token.get_value()
         response = requests.post(self._URL + '?price', data={
             'token': token_value
@@ -127,5 +135,4 @@ class NetConnection():
             print(json_response['message'])
             return True
 
-        print(json_response['message'])
         return False

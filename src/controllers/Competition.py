@@ -24,12 +24,11 @@ class Competition():
     
     def __init__(self, ui: UserInterface):
         self._ui = ui
-        self._conn = NetConnection.get_instance()
         self._board = Scoreboard()
         self._storage = Storage()
         self._factory = EntityFactory()
+        self._conn = NetConnection.get_instance()
         
-        self._board.set_connection(self._conn)
         self._factory.set_UI(ui)
     
     def run_game(self) -> None:
@@ -98,6 +97,6 @@ class Competition():
         if self._conn.claim_prize(token):
             self._ui.prompt_user("Yay! You won!")
         else:
-            self._ui.prompt_user("Better luck next time")
+            self._ui.prompt_user("Close, but no cigar. Better luck next time")
         
         sys.exit(0)

@@ -12,13 +12,16 @@ class Scoreboard:
 	_state: int          = 0
 	
 	def __init__(self):
-		pass
+		self._conn = NetConnection.get_instance()
 	
 	def start_timer(self, token: Token) -> None:
+		'''
+        Starts a timer, visible for all to see.
+        '''
 		self._conn.start_timer(token)
 	
 	def stop_timer(self, token: Token) -> None:
+		'''
+        Stops the aforementioned timer.
+        '''
 		self._conn.stop_timer(token)
-	
-	def set_connection(self, conn: NetConnection) -> None:
-		self._conn = conn

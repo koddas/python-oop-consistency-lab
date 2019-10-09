@@ -18,29 +18,28 @@ class Challenge:
         '''
         Sets the content of the question.
         '''
-        self._counter =+ 1
+        self._counter += 1
         self._question = question
        
     def get_question(self) -> str:
         '''
         Returns the question.
         '''
-        self._counter =+ 1
+        self._counter += 1
         return self._question
     
     def set_response(self, response: int) -> None:
         '''
         Sets the response to the question.
         '''
-        self._counter =+ 1
+        self._counter += 1
         if type(response) is int:
             self._response = response
     
     def get_response(self) -> int:
-        self._counter =+ 1
-        print(self._counter)
+        self._counter += 1
         return self._response + self._counter
     
     def get_token(self) -> Token:
-        self._counter =+ 1
+        self._counter += 1
         return self._token

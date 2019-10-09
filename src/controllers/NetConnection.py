@@ -11,7 +11,7 @@ class NetConnection():
     '''
     
     _instance = None
-    _URL = "127.0.0.1:8050"
+    _URL = "http://127.0.0.1:8050"
     
     def __init__(self):
         if NetConnection._instance:
@@ -34,11 +34,12 @@ class NetConnection():
         '''
         token_value = token.get_value()
         people = []
-        for person in Group.get_all_members():
+        for person in group.get_all_members():
             people.append(person.get_full_name())
 
         response = requests.post(self._URL + '?signup', data={
-            'people': json.encoder(people),
+            'group': json.dumps(group.get_name()),
+            'people': json.dumps(people),
             'token': token_value
         })
         json_response = response.json()

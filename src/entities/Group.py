@@ -38,7 +38,7 @@ class Group:
         Returns a member of this group, based on the order in which the members
         were added. 
         '''
-        return List[position]
+        return self._members[position]
     
     def get_all_members(self) -> List[Person]:
         '''

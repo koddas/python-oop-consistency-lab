@@ -30,6 +30,7 @@ class Competition():
         self._factory = EntityFactory()
         
         self._board.set_connection(self._conn)
+        self._factory.set_UI(ui)
     
     def run_game(self) -> None:
         choice: int = self._ui.choose_step()
@@ -50,8 +51,8 @@ class Competition():
         group = self._factory.create_group()
         
         self._ui.prompt_user("Now, let's add our first member.")
-        group.add_member(self._ui.create_person())
-        while self._ui.ask_user("Add another member? (y/n)\n") == 'y':
+        group.add_member(self._factory.create_person())
+        while self._ui.ask_user("Add another member? (y/n)") == 'y':
             group.add_member(self._factory.create_person())
         
         token = Token()

@@ -1,8 +1,10 @@
 from entities.Token import Token
 from entities.Group import Group
 from boundaries.NetConnection import NetConnection
-from controllers.Scoreboard import Scoreboard
 from boundaries.UserInterface import UserInterface
+from controllers.Scoreboard import Scoreboard
+from controllers.Storage import Storage
+from fileinput import filename
 
 class Competition():
     '''
@@ -14,6 +16,7 @@ class Competition():
     _ui: UserInterface = None
     _conn: NetConnection = None
     _board: Scoreboard = None
+    _storage: Storagee = None
     
     # You may fiddle around with the following fields
     FILE_PREFIX: str     = "competition_"
@@ -22,15 +25,35 @@ class Competition():
         self._ui = ui
         self._conn = NetConnection()
         self._board = Scoreboard()
+        self._storage = Storage()
         
         self._board.set_connection(self._conn)
     
-    def start_game(self, group: Group) -> Token:
+    def start_game(self) -> None:
+        self._ui.prompt_user("Welcome to the game!")
+        self._ui.prompt_user("--------------------")
+        
+        group = self._ui.create_group()
+        
+        self._ui.prompt_user("Now, let's add our first member.")
+        group.add_member(self._ui.create_person())
+        while self._ui.ask_user("Add another member? (y/n)\n") == 'y':
+            group.add_member(self._ui.create_person())
+        
         token = Token()
         
-        self._conn.signup(group, token)
-        
-        return token
+        filename = self._ui.request_filename()
+        if self._storage.save(Competition.FILE_PREFIX + filename, token):
+            if self._conn.signup(group, token):
+                self._ui.prompt_user("Thank you. You're now registered.")
+            else:
+                self._ui.prompt_user("Couldn't register.")
+        else:
+            self._ui.prompt_user("Couldn't save token.")
+        exit()
+    
+    def perform_challenge(self) -> None:
+        pass
     
     def finish_game(self, token: Token) -> None:
         pass

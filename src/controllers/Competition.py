@@ -78,8 +78,26 @@ class Competition():
             sys.exit(0)
         
         challenge = self._conn.request_challenge(token)
+        self._ui.present_challenge(challenge)
+        answer = int(self._ui.ask_user("Your answer, please"))
+        challenge.set_response(answer)
+        
+        self._ui.prompt_user("Thank you. Submitting your answer.")
+        if self._conn.submit_response(challenge):
+            self._board.stop_timer(token)
+            self._ui.prompt_user("Good going! Now, go and claim your prize!")
+        else:
+            self._ui.prompt_user("No, that's not the correct answer.")
         
         sys.exit(0)
     
     def finish_game(self) -> None:
+        self._ui.prompt_user("Claim your prize! First, let's get that token.")
+        name = self._ui.request_filename()
+        token = self._storage.read(Competition.FILE_PREFIX + name, Token)
+        if self._conn.claim_prize(token):
+            self._ui.prompt_user("Yay! You won!")
+        else:
+            self._ui.prompt_user("Better luck next time")
+        
         sys.exit(0)

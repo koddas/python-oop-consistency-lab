@@ -91,20 +91,16 @@ class NetConnection():
         response = requests.post(self._URL + '?get-challenge', data={
             'token': token_value
         })
-        json_response = response.json()
-
-        if json_response['success']:
-            print(json_response['message'])
-            return True
-
-        print(json_response['message'])
-        return False
+        challenge = Challenge(token)
+        challenge.set_question(response.content.decode("utf-8"))
+        
+        return challenge
     
-    def submit_response(self, token: Token, challenge: Challenge) -> bool:
+    def submit_response(self, challenge: Challenge) -> bool:
         '''
         Submits the response to the challenge.
         '''
-        token_value = token.get_value()
+        token_value = challenge.get_token().get_value()
         response = requests.post(self._URL + '?check-challenge', data={
             'token': token_value,
             'guess': challenge.get_response()
@@ -114,7 +110,6 @@ class NetConnection():
         if json_response['success']:
             return True
 
-        print(json_response['message'])
         return False
     
     def claim_prize(self, token: Token) -> bool:

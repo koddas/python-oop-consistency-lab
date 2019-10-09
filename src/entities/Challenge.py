@@ -38,6 +38,7 @@ class Challenge:
     
     def get_response(self) -> int:
         self._counter =+ 1
+        print(self._counter)
         return self._response + self._counter
     
     def get_token(self) -> Token:

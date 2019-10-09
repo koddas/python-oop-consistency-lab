@@ -46,4 +46,7 @@ class TextUI(UserInterface):
         '''
         Presents a challenge to the user
         '''
-        pass
+        print("This is your task:")
+        print()
+        print("  " + challenge.get_question())
+        print()

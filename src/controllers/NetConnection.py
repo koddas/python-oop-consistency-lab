@@ -11,7 +11,7 @@ class NetConnection():
     '''
     
     _instance = None
-    _URL = "http://127.0.0.1:8050"
+    _URL = "http://antontibblin.se/oop-labb/api.php"
     
     def __init__(self):
         if NetConnection._instance:
@@ -38,16 +38,16 @@ class NetConnection():
             people.append(person.get_full_name())
 
         response = requests.post(self._URL + '?signup', data={
-            'group': json.dumps(group.get_name()),
+            'name': json.dumps(group.get_name()),
             'people': json.dumps(people),
             'token': token_value
         })
         json_response = response.json()
 
-        if json_response.success:
+        if json_response['success']:
             return True
 
-        print(json_response.message)
+        print(json_response['message'])
         return False
 
     
@@ -61,10 +61,10 @@ class NetConnection():
         })
         json_response = response.json()
 
-        if json_response.success:
+        if json_response['success']:
             return True
 
-        print(json_response.message)
+        print(json_response['message'])
         return False
     
     def stop_timer(self, token: Token) -> bool:
@@ -77,10 +77,10 @@ class NetConnection():
         })
         json_response = response.json()
 
-        if json_response.success:
+        if json_response['success']:
             return True
 
-        print(json_response.message)
+        print(json_response['message'])
         return False
     
     def request_challenge(self, token: Token) -> Challenge:
@@ -88,15 +88,16 @@ class NetConnection():
         Asks for the challenge that you'll have to solve.
         '''
         token_value = token.get_value()
-        response = requests.post(self._URL + '?challenge', data={
+        response = requests.post(self._URL + '?get-challenge', data={
             'token': token_value
         })
         json_response = response.json()
 
-        if json_response.success:
+        if json_response['success']:
+            print(json_response['message'])
             return True
 
-        print(json_response.message)
+        print(json_response['message'])
         return False
     
     def submit_response(self, token: Token, challenge: Challenge) -> bool:
@@ -104,15 +105,16 @@ class NetConnection():
         Submits the response to the challenge.
         '''
         token_value = token.get_value()
-        response = requests.post(self._URL + '?response', data={
-            'token': token_value
+        response = requests.post(self._URL + '?check-challenge', data={
+            'token': token_value,
+            'guess': challenge.get_response()
         })
         json_response = response.json()
 
-        if json_response.success:
+        if json_response['success']:
             return True
 
-        print(json_response.message)
+        print(json_response['message'])
         return False
     
     def claim_prize(self, token: Token) -> bool:
@@ -126,8 +128,9 @@ class NetConnection():
         })
         json_response = response.json()
 
-        if json_response.success:
+        if json_response['success']:
+            print(json_response['message'])
             return True
 
-        print(json_response.message)
+        print(json_response['message'])
         return False

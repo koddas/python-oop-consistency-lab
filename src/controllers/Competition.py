@@ -32,9 +32,21 @@ class Competition():
         
         self._board.set_connection(self._conn)
     
+    def run_game(self) -> None:
+        choice: int = self._ui.choose_step()
+        
+        if choice == 1:
+            self.start_game()
+        elif choice == 2:
+            self.perform_challenge()
+        elif choice == 3:
+            self.finish_game()
+        else:
+            self._ui.prompt_user("That's not how we play. Try again.")
+            sys.exit(0)
+    
     def start_game(self) -> None:
-        self._ui.prompt_user("Welcome to the game!")
-        self._ui.prompt_user("--------------------")
+        self._ui.prompt_user("Ok. Let's start by creating a group.")
         
         group = self._factory.create_group()
         
@@ -59,5 +71,5 @@ class Competition():
     def perform_challenge(self) -> None:
         sys.exit(0)
     
-    def finish_game(self, token: Token) -> None:
+    def finish_game(self) -> None:
         sys.exit(0)

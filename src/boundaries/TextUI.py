@@ -9,6 +9,21 @@ class TextUI(UserInterface):
     def __init__(self):
         pass
     
+    def choose_step(self) -> int:
+        '''
+        Presents the user with a menu, from which the user can choose a task to
+        run.
+        '''
+        print("Welcome to the game!")
+        print("--------------------")
+        print("What would you like to do?")
+        print("1. Register for game")
+        print("2. Play the game")
+        print("3. Claim the prize")
+        choice: int = int(self._ui.ask_user("Please, pick a number"))
+        
+        return choice
+    
     def prompt_user(self, message: str) -> None:
         '''
         Prompts the user with a message.

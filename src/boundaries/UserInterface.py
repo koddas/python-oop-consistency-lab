@@ -4,6 +4,10 @@ from entities.Challenge import Challenge
 class UserInterface(ABC):
     
     @abstractmethod
+    def choose_step(self) -> int:
+        pass
+    
+    @abstractmethod
     def prompt_user(self, message: str) -> None:
         pass
     

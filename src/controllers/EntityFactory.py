@@ -23,7 +23,7 @@ class EntityFactory:
         '''
         Asks the user for input to create a new group.
         '''
-        print("Creating a new group")
+        self._ui.prompt_user("Creating a new group")
         name = self._ui.ask_user("What's the name of the group?")
         
         group = Group()
@@ -35,7 +35,7 @@ class EntityFactory:
         '''
         Asks the user for input in order to create a new person.
         '''
-        print("Adding a new person")
+        self._ui.prompt_user("Adding a new person")
         first_name = self._ui.ask_user("What's the first name of this person?")
         last_name = self._ui.ask_user("What's the last name of this person?")
         

@@ -1,5 +1,6 @@
 from entities.Token import Token
 from entities.Group import Group
+from boundaries.NetConnection import NetConnection
 
 class Scoreboard:
 	'''
@@ -7,11 +8,18 @@ class Scoreboard:
 	publish your group's progress.
 	'''
 	
+	# The following fields are not to be touched.
+	_conn: NetConnection = None
+	_state: int          = 0
+	
 	def __init__(self):
 		pass
 	
-	def signup(self, group: Group) -> Token:
-		pass
+	def start_timer(self, token: Token) -> None:
+		self._conn.start_timer(token)
 	
-	def finalize(self, token: Token) -> None:
-		pass
+	def stop_timer(self, token: Token) -> None:
+		self._conn.stop_timer(token)
+	
+	def set_connection(self, conn: NetConnection) -> None:
+		self._conn = conn

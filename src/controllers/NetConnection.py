@@ -10,7 +10,7 @@ class NetConnection():
     competition.
     '''
     
-    _instance: NetConnection = None
+    _instance = None
     _URL = "127.0.0.1:8050"
     
     def __init__(self):

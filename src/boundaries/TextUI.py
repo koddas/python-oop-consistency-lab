@@ -20,7 +20,7 @@ class TextUI(UserInterface):
         print("1. Register for game")
         print("2. Play the game")
         print("3. Claim the prize")
-        choice: int = int(self._ui.ask_user("Please, pick a number"))
+        choice: int = int(self.ask_user("Please, pick a number"))
         
         return choice
     

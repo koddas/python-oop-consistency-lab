@@ -16,7 +16,7 @@ class Competition():
     _ui: UserInterface      = None
     _conn: NetConnection    = None
     _board: Scoreboard      = None
-    _storage: Storagee      = None
+    _storage: Storage       = None
     _factory: EntityFactory = None
     
     # You may fiddle around with the following fields
@@ -24,7 +24,7 @@ class Competition():
     
     def __init__(self, ui: UserInterface):
         self._ui = ui
-        self._conn = NetConnection.get_instance()()
+        self._conn = NetConnection.get_instance()
         self._board = Scoreboard()
         self._storage = Storage()
         self._factory = EntityFactory()

@@ -37,9 +37,15 @@ class Challenge:
             self._response = response
     
     def get_response(self) -> int:
+        '''
+        Returns the response from this object.
+        '''
         self._counter += 1
         return self._response + self._counter
     
     def get_token(self) -> Token:
+        '''
+        Returns the token associated with this challenge.
+        '''
         self._counter += 1
         return self._token

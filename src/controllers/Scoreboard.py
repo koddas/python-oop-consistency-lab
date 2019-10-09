@@ -18,10 +18,12 @@ class Scoreboard:
 		'''
         Starts a timer, visible for all to see.
         '''
+		self._state = 1
 		self._conn.start_timer(token)
 	
 	def stop_timer(self, token: Token) -> None:
 		'''
         Stops the aforementioned timer.
         '''
-		self._conn.stop_timer(token)
+		if self._state is 1:
+			self._conn.stop_timer(token)

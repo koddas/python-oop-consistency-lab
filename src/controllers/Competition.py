@@ -48,6 +48,7 @@ class Competition():
         filename = self._ui.request_filename()
         if self._storage.save(Competition.FILE_PREFIX + filename, token):
             if self._conn.signup(group, token):
+                self._board.start_timer(token)
                 self._ui.prompt_user("Thank you. You're now registered.")
             else:
                 self._ui.prompt_user("Couldn't register.")
@@ -56,7 +57,7 @@ class Competition():
         exit()
     
     def perform_challenge(self) -> None:
-        pass
+        exit()
     
     def finish_game(self, token: Token) -> None:
-        pass
+        exit()

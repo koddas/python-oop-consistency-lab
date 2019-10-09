@@ -7,9 +7,15 @@ class Serializable(ABC):
 	
 	@abstractmethod	
 	def serialize(self) -> str:
+		'''
+		Converts the contents of this object into a string.
+		'''
 		pass
 	
 	@staticmethod
 	@abstractmethod
 	def deserialize(raw: str) -> object:
+		'''
+		Creates an object of the class based on serialized data.
+		'''
 		pass

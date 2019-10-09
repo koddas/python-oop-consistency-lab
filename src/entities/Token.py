@@ -18,10 +18,16 @@ class Token(Serializable):
         return self._token
     
     def serialize(self) -> str:
+        '''
+        Converts the contents of this object into a string.
+        '''
         return self._token.__str__()
     
     @staticmethod
     def deserialize(raw:str) -> object:
+        '''
+        Creates an object of the class based on serialized data.
+        '''
         token = Token()
         token._token = UUID(raw)
         

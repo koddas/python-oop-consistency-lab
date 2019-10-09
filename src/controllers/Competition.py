@@ -32,6 +32,9 @@ class Competition():
         self._factory.set_UI(ui)
     
     def run_game(self) -> None:
+        '''
+        Presents the user with a menu and runs the chosen action.
+        '''
         choice: int = self._ui.choose_step()
         
         if choice == 1:
@@ -45,6 +48,10 @@ class Competition():
             sys.exit(0)
     
     def start_game(self) -> None:
+        '''
+        Initializes the game by asking the user to create a group of eager
+        players.
+        '''
         self._ui.prompt_user("Ok. Let's start by creating a group.")
         
         group = self._factory.create_group()
@@ -68,6 +75,9 @@ class Competition():
         sys.exit(0)
     
     def perform_challenge(self) -> None:
+        '''
+        Runs the challenge part of the game.
+        '''
         self._ui.prompt_user("Cool. Let's play!")
         name = self._ui.request_filename() 
         token = self._storage.read(Competition.FILE_PREFIX + name, Token)
@@ -91,6 +101,9 @@ class Competition():
         sys.exit(0)
     
     def finish_game(self) -> None:
+        '''
+        Finishes the game. If you're fast enough, you get the prize!
+        '''
         self._ui.prompt_user("Claim your prize! First, let's get that token.")
         name = self._ui.request_filename()
         token = self._storage.read(Competition.FILE_PREFIX + name, Token)

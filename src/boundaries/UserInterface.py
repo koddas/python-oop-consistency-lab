@@ -1,6 +1,4 @@
 from abc import ABC, abstractmethod
-from entities.Group import Group
-from entities.Person import Person
 from entities.Challenge import Challenge
 
 class UserInterface(ABC):
@@ -11,14 +9,6 @@ class UserInterface(ABC):
     
     @abstractmethod
     def ask_user(self, message: str) -> str:
-        pass
-    
-    @abstractmethod
-    def create_group(self) -> Group:
-        pass
-    
-    @abstractmethod
-    def create_person(self) -> Person:
         pass
     
     @abstractmethod

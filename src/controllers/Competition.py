@@ -5,6 +5,7 @@ from boundaries.UserInterface import UserInterface
 from controllers.Scoreboard import Scoreboard
 from controllers.Storage import Storage
 from fileinput import filename
+from controllers.EntityFactory import EntityFactory
 
 class Competition():
     '''
@@ -13,10 +14,11 @@ class Competition():
     '''
     
     # The following fields are not to be touched.
-    _ui: UserInterface = None
-    _conn: NetConnection = None
-    _board: Scoreboard = None
-    _storage: Storagee = None
+    _ui: UserInterface      = None
+    _conn: NetConnection    = None
+    _board: Scoreboard      = None
+    _storage: Storagee      = None
+    _factory: EntityFactory = None
     
     # You may fiddle around with the following fields
     FILE_PREFIX: str     = "competition_"
@@ -26,6 +28,7 @@ class Competition():
         self._conn = NetConnection()
         self._board = Scoreboard()
         self._storage = Storage()
+        self._factory = EntityFactory()
         
         self._board.set_connection(self._conn)
     
@@ -33,12 +36,12 @@ class Competition():
         self._ui.prompt_user("Welcome to the game!")
         self._ui.prompt_user("--------------------")
         
-        group = self._ui.create_group()
+        group = self._factory.create_group()
         
         self._ui.prompt_user("Now, let's add our first member.")
         group.add_member(self._ui.create_person())
         while self._ui.ask_user("Add another member? (y/n)\n") == 'y':
-            group.add_member(self._ui.create_person())
+            group.add_member(self._factory.create_person())
         
         token = Token()
         

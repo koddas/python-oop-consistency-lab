@@ -1,6 +1,5 @@
 from uuid import uuid4, UUID
 from entities.Serializable import Serializable
-from _curses import raw
 
 class Token(Serializable):
     '''

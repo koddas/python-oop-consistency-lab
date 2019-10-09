@@ -1,6 +1,5 @@
 from entities.Token import Token
-from entities.Group import Group
-from boundaries.NetConnection import NetConnection
+from controllers.NetConnection import NetConnection
 
 class Scoreboard:
 	'''

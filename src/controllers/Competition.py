@@ -1,10 +1,9 @@
 from entities.Token import Token
 from entities.Group import Group
-from boundaries.NetConnection import NetConnection
 from boundaries.UserInterface import UserInterface
+from controllers.NetConnection import NetConnection
 from controllers.Scoreboard import Scoreboard
 from controllers.Storage import Storage
-from fileinput import filename
 from controllers.EntityFactory import EntityFactory
 import sys
 

@@ -6,6 +6,7 @@ from controllers.Scoreboard import Scoreboard
 from controllers.Storage import Storage
 from fileinput import filename
 from controllers.EntityFactory import EntityFactory
+import sys
 
 class Competition():
     '''
@@ -54,10 +55,10 @@ class Competition():
                 self._ui.prompt_user("Couldn't register.")
         else:
             self._ui.prompt_user("Couldn't save token.")
-        exit()
+        sys.exit(0)
     
     def perform_challenge(self) -> None:
-        exit()
+        sys.exit(0)
     
     def finish_game(self, token: Token) -> None:
-        exit()
+        sys.exit(0)

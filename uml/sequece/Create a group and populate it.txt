@@ -1,0 +1,52 @@
+title Create a group and populate it
+
+actor User
+boundary UserInterface
+control Competition
+control EntityFactory
+entity Group
+
+activate User
+activate Competition
+
+Competition -> UserInterface: prompt_user("OK. Let's start by creating a group")
+activate UserInterface
+space 
+deactivate UserInterface
+
+Competition -> EntityFactory: create_group
+activate EntityFactory
+EntityFactory ->UserInterface: prompt_user("Creating a new group")
+activate UserInterface
+space 
+deactivate UserInterface
+EntityFactory ->UserInterface: ask_user("What's the name of the group?")
+activate UserInterface
+User -> UserInterface: A group name
+UserInterface -->EntityFactory: string
+deactivate UserInterface
+EntityFactory -> *Group:
+EntityFactory ->Group: set_name(string)
+activate Group
+space 
+deactivate Group
+EntityFactory -->Competition: Group
+deactivate EntityFactory
+ref over Competition: Create a person
+Competition ->Group: add_member(Person)
+activate Group
+space
+deactivate Group
+
+loop answer == y
+Competition ->UserInterface: ask_user("Add another member? (y/n)?")
+activate UserInterface
+User ->UserInterface: yes or no
+UserInterface -->Competition: string
+deactivate UserInterface
+ref over Competition: Create a person
+Competition ->Group: add_member(Person)
+activate Group
+space
+deactivate Group
+end

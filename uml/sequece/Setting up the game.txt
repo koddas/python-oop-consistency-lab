@@ -1,0 +1,56 @@
+title Setting up the game
+
+actor User
+participant application
+boundary UserInterface
+control Competition
+control Storage
+control Scoreboard
+control NetConnection
+control EntityFactory
+
+activate User
+User -> *application: Run application
+activate application
+application -> *UserInterface: <<create>>\nUserInterface
+application -> *Competition: <<create>>\nCompetition(UserInterface)
+
+activate Competition
+
+Competition -> *Storage: <<create>>\nStorage
+Competition -> *Scoreboard: <<create>>\nScoreboard
+activate Scoreboard
+Scoreboard -> NetConnection: get_instance
+activate NetConnection
+opt instance is None
+NetConnection -> NetConnection: <<create>>\nNetConnection
+activate NetConnection
+space
+deactivate NetConnection
+end
+NetConnection --> Scoreboard: NetConnection
+deactivate NetConnection
+deactivate Scoreboard
+
+Competition -> *EntityFactory: <<create>>\nEntityFactory
+
+Competition -> NetConnection: get_instance
+activate NetConnection
+opt instance is None
+NetConnection -> NetConnection: <<create>>\nNetConnection
+activate NetConnection
+space
+deactivate NetConnection
+end
+NetConnection --> Competition: NetConnection
+deactivate NetConnection
+
+Competition -> EntityFactory:set_ui(UserInterface)
+activate EntityFactory
+space 
+deactivate EntityFactory
+deactivate Competition
+
+application -> Competition: run_game
+activate Competition
+ref over User, applicatio: Play the game

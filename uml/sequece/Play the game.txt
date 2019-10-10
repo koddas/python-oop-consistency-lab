@@ -1,0 +1,36 @@
+title Play the game
+
+actor User
+boundary UserInterface
+control Competition
+
+activate User
+activate Competition
+
+Competition -> UserInterface: choose_step
+activate UserInterface
+User -> UserInterface: Choose step
+UserInterface --> Competition: int
+deactivate UserInterface
+
+alt step == 1
+Competition ->Competition: start_game
+activate Competition
+ref over Competition: Start the game
+space 
+deactivate Competition
+else step == 2
+Competition ->Competition: perform_challenge
+activate Competition
+ref over Competition: Perform challenge
+space 
+deactivate Competition
+else step == 3
+Competition ->Competition: finish_game
+activate Competition
+ref over Competition: Finish the game
+space 
+deactivate Competition
+else else
+note over Competition:Terminate program
+end

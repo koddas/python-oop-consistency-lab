@@ -1,0 +1,51 @@
+title Play the game
+
+actor User
+boundary UserInterface
+control Competition
+control EntityFactory
+entity Token
+
+activate User
+activate Competition
+ref over Competition: Create a group and populate it
+space 
+deactivate Competition
+deactivate User
+
+Competition -> *Token: <<create>>
+
+Competition ->UserInterface: request_filename
+activate UserInterface
+User ->UserInterface: File name
+UserInterface -->Competition: string
+deactivate UserInterface
+
+Competition ->Storage: save(string, Token)
+activate Storage
+space
+deactivate Storage
+
+alt saved successfully
+Competition ->Scoreboard: start_timer(Token)
+activate Scoreboard
+space
+deactivate Scoreboard
+alt timer started
+Competition ->UserInterface: prompt_user("Thank you. You're now registered.")
+activate UserInterface
+space 
+deactivate UserInterface
+else 
+Competition ->UserInterface: prompt_user("Couldn't registger.")
+activate UserInterface
+space 
+deactivate UserInterface
+end
+else
+Competition ->UserInterface: prompt_user("Couldn't save token.")
+activate UserInterface
+space 
+deactivate UserInterface
+end
+note over Competition:Terminate program

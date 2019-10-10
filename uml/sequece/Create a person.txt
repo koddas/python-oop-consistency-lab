@@ -1,0 +1,38 @@
+title Create a person
+
+actor User
+boundary UserInterface
+control Competition
+control EntityFactory
+entity Person
+
+activate User
+activate Competition
+
+Competition -> EntityFactory: create_person
+activate EntityFactory
+EntityFactory ->UserInterface: prompt_user("Adding a new person")
+activate UserInterface
+space 
+deactivate UserInterface
+EntityFactory ->UserInterface: ask_user("What's the first name of this person?")
+activate UserInterface
+User -> UserInterface: A name
+UserInterface -->EntityFactory: string
+deactivate UserInterface
+EntityFactory ->UserInterface: ask_user("What's the last name of this person?")
+activate UserInterface
+User -> UserInterface: A name
+UserInterface -->EntityFactory: string
+deactivate UserInterface
+EntityFactory -> *Person:
+EntityFactory ->Person: set_first_name(string)
+activate Person
+space 
+deactivate Person
+EntityFactory ->Person: set_last_name(string)
+activate Person
+space 
+deactivate Person
+EntityFactory -->Competition: Person
+deactivate EntityFactory

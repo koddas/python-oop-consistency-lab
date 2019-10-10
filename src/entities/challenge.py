@@ -1,4 +1,4 @@
-from entities.Token import Token
+from entities.token import Token
 
 class Challenge:
     '''

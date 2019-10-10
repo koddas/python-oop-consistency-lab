@@ -1,9 +1,9 @@
-from entities.Token import Token
-from boundaries.UserInterface import UserInterface
-from controllers.NetConnection import NetConnection
-from controllers.Scoreboard import Scoreboard
-from controllers.Storage import Storage
-from controllers.EntityFactory import EntityFactory
+from entities.token import Token
+from boundaries.user_interface import UserInterface
+from controllers.net_connection import NetConnection
+from controllers.scoreboard import Scoreboard
+from controllers.storage import Storage
+from controllers.entity_factory import EntityFactory
 import sys
 
 class Competition():

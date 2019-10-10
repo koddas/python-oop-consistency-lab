@@ -1,5 +1,5 @@
 from typing import List
-from entities.Person import Person
+from entities.person import Person
 
 class Group:
     '''

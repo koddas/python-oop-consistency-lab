@@ -1,5 +1,5 @@
 from uuid import uuid4, UUID
-from entities.Serializable import Serializable
+from entities.serializable import Serializable
 
 class Token(Serializable):
     '''

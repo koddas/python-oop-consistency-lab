@@ -1,6 +1,6 @@
-from boundaries.UserInterface import UserInterface
-from entities.Group import Group
-from entities.Person import Person
+from boundaries.user_interface import UserInterface
+from entities.group import Group
+from entities.person import Person
 
 class EntityFactory:
     '''

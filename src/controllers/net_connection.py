@@ -1,9 +1,9 @@
 import requests
 import json
 import inspect
-from entities.Token import Token
-from entities.Group import Group
-from entities.Challenge import Challenge
+from entities.token import Token
+from entities.group import Group
+from entities.challenge import Challenge
 
 class NetConnection():
     '''

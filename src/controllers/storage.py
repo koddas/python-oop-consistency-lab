@@ -1,4 +1,4 @@
-from entities.Serializable import Serializable
+from entities.serializable import Serializable
 
 class Storage:
     '''

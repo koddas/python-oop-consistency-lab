@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from entities.Challenge import Challenge
+from entities.challenge import Challenge
 
 class UserInterface(ABC):
     

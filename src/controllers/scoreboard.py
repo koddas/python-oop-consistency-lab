@@ -1,5 +1,5 @@
-from entities.Token import Token
-from controllers.NetConnection import NetConnection
+from entities.token import Token
+from controllers.net_connection import NetConnection
 
 class Scoreboard:
 	'''

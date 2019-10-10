@@ -1,5 +1,5 @@
-from boundaries.UserInterface import UserInterface
-from entities.Challenge import Challenge
+from boundaries.user_interface import UserInterface
+from entities.challenge import Challenge
 
 class TextUI(UserInterface):
     '''

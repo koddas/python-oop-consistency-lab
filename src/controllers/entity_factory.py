@@ -13,7 +13,7 @@ class EntityFactory:
     def __init__(self):
         pass
     
-    def set_UI(self, ui: UserInterface):
+    def set_ui(self, ui: UserInterface) -> None:
         '''
         Sets the boundary class used by this factory
         '''

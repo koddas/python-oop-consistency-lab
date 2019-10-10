@@ -29,7 +29,7 @@ class Competition():
         self._factory = EntityFactory()
         self._conn = NetConnection.get_instance()
         
-        self._factory.set_UI(ui)
+        self._factory.set_ui(ui)
     
     def run_game(self) -> None:
         '''

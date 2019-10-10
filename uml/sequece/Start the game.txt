@@ -29,13 +29,13 @@ Competition ->Scoreboard: start_timer(Token)
 activate Scoreboard
 space
 deactivate Scoreboard
-alt timer started
+alt signup completed
 Competition ->UserInterface: prompt_user("Thank you. You're now registered.")
 activate UserInterface
 space 
 deactivate UserInterface
 else 
-Competition ->UserInterface: prompt_user("Couldn't registger.")
+Competition ->UserInterface: prompt_user("Couldn't register.")
 activate UserInterface
 space 
 deactivate UserInterface

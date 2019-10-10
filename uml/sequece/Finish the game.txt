@@ -36,7 +36,7 @@ end
 
 Competition ->NetConnection: claim_prize(Token)
 activate NetConnection
-NetConnection -->Competition: Challenge
+NetConnection -->Competition: bool
 deactivate NetConnection
 
 alt The game was won

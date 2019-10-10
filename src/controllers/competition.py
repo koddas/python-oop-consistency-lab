@@ -107,9 +107,14 @@ class Competition():
         self._ui.prompt_user("Claim your prize! First, let's get that token.")
         name = self._ui.request_filename()
         token = self._storage.read(Competition.FILE_PREFIX + name, Token)
+        
+        if token is None:
+            self._ui.prompt_user("Couldn't read your token")
+            sys.exit(0)
+            
         if self._conn.claim_prize(token):
             self._ui.prompt_user("Yay! You won!")
         else:
-            self._ui.prompt_user("Close, but no cigar. Better luck next time")
+            self._ui.prompt_user("Close, but no cigar. Better luck next time.")
         
         sys.exit(0)

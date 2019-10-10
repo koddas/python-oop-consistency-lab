@@ -8,8 +8,6 @@ class EntityFactory:
     a boundary class. Obviously.
     '''
     
-    _ui: UserInterface = None
-    
     def __init__(self):
         pass
     
@@ -17,30 +15,16 @@ class EntityFactory:
         '''
         Sets the boundary class used by this factory
         '''
-        self._ui = ui
+        pass
     
     def create_group(self) -> Group:
         '''
         Asks the user for input to create a new group.
         '''
-        self._ui.prompt_user("Creating a new group")
-        name = self._ui.ask_user("What's the name of the group?")
-        
-        group = Group()
-        group.set_name(name)
-        
-        return group
+        pass
     
     def create_person(self) -> Person:
         '''
         Asks the user for input in order to create a new person.
         '''
-        self._ui.prompt_user("Adding a new person")
-        first_name = self._ui.ask_user("What's the first name of this person?")
-        last_name = self._ui.ask_user("What's the last name of this person?")
-        
-        person = Person()
-        person.set_first_name(first_name)
-        person.set_last_name(last_name)
-        
-        return person
+        pass

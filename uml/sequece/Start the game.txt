@@ -1,4 +1,4 @@
-title Play the game
+title Start the game
 
 actor User
 boundary UserInterface
@@ -10,8 +10,6 @@ activate User
 activate Competition
 ref over Competition: Create a group and populate it
 space 
-deactivate Competition
-deactivate User
 
 Competition -> *Token: <<create>>
 

@@ -1,0 +1,85 @@
+title Perform challenge
+
+actor User
+boundary UserInterface
+control Competition
+control EntityFactory
+control Storage
+control NetConnection
+control Scoreboard
+entity Challenge
+
+activate User
+activate Competition
+
+Competition ->UserInterface: prompt_user("Cool. Let's play!")
+activate UserInterface
+space
+deactivate UserInterface
+
+Competition ->UserInterface: request_filename
+activate UserInterface
+User ->UserInterface: File name
+UserInterface -->Competition: string
+deactivate UserInterface
+
+Competition ->Storage: read(string, Token class object)
+activate Storage
+Storage -->Competition: Token
+deactivate Storage
+
+opt token is None
+Competition ->UserInterface: prompt_user("Couldn't read your token")
+activate UserInterface
+space
+deactivate UserInterface
+note over Competition: Terminate program
+end
+
+Competition ->NetConnection: request_challenge(Token)
+activate NetConnection
+NetConnection -->Competition: Challenge
+deactivate NetConnection
+
+Competition ->UserInterface: present_challenge(Challenge)
+activate UserInterface
+space
+deactivate UserInterface
+
+Competition ->UserInterface: ask_user("Your answer, please!")
+activate UserInterface
+User ->UserInterface: An answer
+UserInterface -->Competition: string
+deactivate UserInterface
+
+Competition ->Challenge: set_response(int)
+activate Challenge
+space 
+deactivate Challenge
+
+Competition ->UserInterface: prompt_user("Thank you. Submitting your answer.")
+activate UserInterface
+space
+deactivate UserInterface
+
+Competition -> NetConnection: submit_response(Challenge)
+activate NetConnection
+NetConnection -->Competition: bool
+deactivate NetConnection
+
+alt Response was accepted
+Competition ->Scoreboard: stop_timer(Token)
+activate Scoreboard
+space 
+deactivate Scoreboard
+Competition ->UserInterface: prompt_user("Good going! Now, go and claim your prize!")
+activate UserInterface
+space
+deactivate UserInterface
+else 
+Competition ->UserInterface: prompt_user("No, that's not the correct answer.")
+activate UserInterface
+space
+deactivate UserInterface
+end
+note over Competition:Terminate program

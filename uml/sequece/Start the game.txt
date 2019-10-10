@@ -1,17 +1,17 @@
-title Play the game
+title Start the game
 
 actor User
 boundary UserInterface
 control Competition
-control EntityFactory
+control Storage
+control NetConnection
+control Scoreboard
 entity Token
 
 activate User
 activate Competition
 ref over Competition: Create a group and populate it
 space 
-deactivate Competition
-deactivate User
 
 Competition -> *Token: <<create>>
 
@@ -27,17 +27,20 @@ space
 deactivate Storage
 
 alt saved successfully
+Competition ->NetConnection: signup(Group, Token)
+activate NetConnection
+NetConnection -->Competition: bool
+deactivate NetConnection
+alt signup completed
 Competition ->Scoreboard: start_timer(Token)
 activate Scoreboard
 space
-deactivate Scoreboard
-alt timer started
 Competition ->UserInterface: prompt_user("Thank you. You're now registered.")
 activate UserInterface
 space 
 deactivate UserInterface
 else 
-Competition ->UserInterface: prompt_user("Couldn't registger.")
+Competition ->UserInterface: prompt_user("Couldn't register.")
 activate UserInterface
 space 
 deactivate UserInterface

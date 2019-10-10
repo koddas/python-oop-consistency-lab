@@ -1,0 +1,53 @@
+title Finish the game
+
+actor User
+boundary UserInterface
+control Competition
+control EntityFactory
+control Storage
+control NetConnection
+
+activate User
+activate Competition
+
+Competition ->UserInterface: prompt_user("Claim your prize! First, let's get that token.")
+activate UserInterface
+space
+deactivate UserInterface
+
+Competition ->UserInterface: request_filename
+activate UserInterface
+User ->UserInterface: File name
+UserInterface -->Competition: string
+deactivate UserInterface
+
+Competition ->Storage: read(string, Token class object)
+activate Storage
+Storage -->Competition: Token
+deactivate Storage
+
+opt token is None
+Competition ->UserInterface: prompt_user("Couldn't read your token")
+activate UserInterface
+space
+deactivate UserInterface
+note over Competition: Terminate program
+end
+
+Competition ->NetConnection: claim_prize(Token)
+activate NetConnection
+NetConnection -->Competition: bool
+deactivate NetConnection
+
+alt The game was won
+Competition ->UserInterface: prompt_user("Yay! You won!")
+activate UserInterface
+space
+deactivate UserInterface
+else 
+Competition ->UserInterface: prompt_user("Close, but no cigar. Better luck next time.")
+activate UserInterface
+space
+deactivate UserInterface
+end
+note over Competition:Terminate program

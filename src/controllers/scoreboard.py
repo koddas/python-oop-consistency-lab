@@ -25,5 +25,5 @@ class Scoreboard:
 		'''
         Stops the aforementioned timer.
         '''
-		if self._state is 1:
+		if self._state is 0:
 			self._conn.stop_timer(token)

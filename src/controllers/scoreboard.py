@@ -8,22 +8,22 @@ class Scoreboard:
 	'''
 	
 	# The following fields are not to be touched.
-	_conn: NetConnection = None
-	_state: int          = 0
+	__conn: NetConnection = None
+	__state: int          = 0
 	
 	def __init__(self):
-		self._conn = NetConnection.get_instance()
+		self.__conn = NetConnection.get_instance()
 	
 	def start_timer(self, token: Token) -> None:
 		'''
         Starts a timer, visible for all to see.
         '''
-		self._state = 1
-		self._conn.start_timer(token)
+		self.__state = 1
+		self.__conn.start_timer(token)
 	
 	def stop_timer(self, token: Token) -> None:
 		'''
         Stops the aforementioned timer.
         '''
-		if self._state is 1:
-			self._conn.stop_timer(token)
+		if self.__state == 1:
+			self.__conn.stop_timer(token)

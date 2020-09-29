@@ -13,11 +13,11 @@ class Competition():
     '''
     
     # The following fields are not to be touched.
-    _ui: UserInterface      = None
-    _conn: NetConnection    = None
-    _board: Scoreboard      = None
-    _storage: Storage       = None
-    _factory: EntityFactory = None
+    __ui: UserInterface      = None
+    __conn: NetConnection    = None
+    __board: Scoreboard      = None
+    __storage: Storage       = None
+    __factory: EntityFactory = None
     
     # You may fiddle around with the following fields
     FILE_PREFIX: str     = "competition_"

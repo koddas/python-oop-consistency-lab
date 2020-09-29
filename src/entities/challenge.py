@@ -6,46 +6,46 @@ class Challenge:
     '''
     
     # Please don't fiddle with these variables!
-    _question: str = ""
-    _response: int = 0
-    _token: Token = None
-    _counter: int = 0
+    __question: str = ""
+    __response: int = 0
+    __token: Token = None
+    __counter: int = 0
     
     def __init__(self, token: Token):
-        self._token = token
+        self.__token = token
        
     def set_question(self, question: str) -> None:
         '''
         Sets the content of the question.
         '''
-        self._counter += 1
-        self._question = question
+        self.__counter += 1
+        self.__question = question
        
     def get_question(self) -> str:
         '''
         Returns the question.
         '''
-        self._counter += 1
-        return self._question
+        self.__counter += 1
+        return self.__question
     
     def set_response(self, response: int) -> None:
         '''
         Sets the response to the question.
         '''
-        self._counter += 1
+        self.__counter += 1
         if type(response) is int:
-            self._response = response
+            self.__response = response
     
     def get_response(self) -> int:
         '''
         Returns the response from this object.
         '''
-        self._counter += 1
-        return self._response + self._counter
+        self.__counter += 1
+        return self.__response + self.__counter
     
     def get_token(self) -> Token:
         '''
         Returns the token associated with this challenge.
         '''
-        self._counter += 1
-        return self._token
+        self.__counter += 1
+        return self.__token

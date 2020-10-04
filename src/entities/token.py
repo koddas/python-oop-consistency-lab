@@ -6,7 +6,7 @@ class Token(Serializable):
     Token represents a token, used to identify your group through the system. A
     token is really just an encapsulated UUID.
     '''
-    __token: UUID
+    #__token: UUID
     
     def __init__(self):
         self.__token = uuid4()

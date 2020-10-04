@@ -8,8 +8,8 @@ class Scoreboard:
 	'''
 	
 	# The following fields are not to be touched.
-	__conn: NetConnection = None
-	__state: int          = 0
+	#__conn: NetConnection = None
+	#__state: int          = 0
 	
 	def __init__(self):
 		self.__conn = NetConnection.get_instance()

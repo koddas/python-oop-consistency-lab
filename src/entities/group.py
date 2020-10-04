@@ -6,8 +6,8 @@ class Group:
     Group represents a group of persons, e.g. a team.
     '''
     
-    __members: List[Person]
-    __name: str
+    #__members: List[Person]
+    #__name: str
     
     def __init__(self):
         self.__members = []

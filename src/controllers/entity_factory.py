@@ -8,7 +8,7 @@ class EntityFactory:
     a boundary class. Obviously.
     '''
     
-    __ui: UserInterface = None
+    #__ui: UserInterface = None
     
     def __init__(self):
         pass

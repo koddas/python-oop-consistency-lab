@@ -6,13 +6,16 @@ class Challenge:
     '''
     
     # Please don't fiddle with these variables!
-    __question: str = ""
-    __response: int = 0
-    __token: Token = None
-    __counter: int = 0
+    #__question: str = ""
+    #__response: int = 0
+    #__token: Token = None
+    #__counter: int = 0
     
     def __init__(self, token: Token):
+        self.__question = ""
+        self.__response = 0
         self.__token = token
+        self.__counter = 0
        
     def set_question(self, question: str) -> None:
         '''

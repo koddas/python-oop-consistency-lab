@@ -3,8 +3,8 @@ class Person:
     Person represents a physical person, e.g. you!
     '''
     
-    __first_name: str
-    __last_name: str
+    #__first_name: str
+    #__last_name: str
     
     def __init__(self):
         self.__first_name = ""
